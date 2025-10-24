@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rohit chowdhury</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+  --primary: #3a86ff;
+  --secondary: #8338ec; /* #8338ec */
+  --dark: #212529;
+  --light: #f8f9fa;
+  --accent: #ff006e;
+}
+
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      scroll-behavior: smooth;
+    }
+    
+    /* Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    nav.scrolled {
+      background: white;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      min-height: 100vh;
+    }
+    
+    /* About Section */
+    .about-img {
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+    
+    .about-img:hover {
+      transform: scale(1.03);
+    }
+    
+    /* Skills Section */
+    .skill-bar {
+      height: 10px;
+      background-color: #e9ecef;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .skill-percentage {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      position: relative;
+      transition: width 1.5s ease-out;
+    }
+    
+    /* Projects Section */
+    .project-card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .project-img {
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .project-card:hover .project-img {
+      transform: scale(1.05);
+    }
+    
+    /* Contact Section */
+    .contact-input {
+      border: 1px solid #ced4da;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(58, 134, 255, 0.25);
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .about-content {
+        flex-direction: column;
+      }
+      
+      .skills-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="py-4 px-6 lg:px-12">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold text-gray-800">Rohit Chowdhury</a>
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="nav-link text-gray-700 hover:text-primary">Home</a>
+        <a href="#about" class="nav-link text-gray-700 hover:text-primary">About</a>
+        <a href="#skills" class="nav-link text-gray-700 hover:text-primary">Skills</a>
+        <a href="#projects" class="nav-link text-gray-700 hover:text-primary">Projects</a>
+        <a href="#contact" class="nav-link text-gray-700 hover:text-primary">Contact</a>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-gray-700 focus:outline-none">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden py-4 px-6 bg-white rounded-lg mt-2 shadow-lg">
+      <div class="flex flex-col space-y-4">
+        <a href="#home" class="nav-link text-gray-700 hover:text-primary">Home</a>
+        <a href="#about" class="nav-link text-gray-700 hover:text-primary">About</a>
+        <a href="#skills" class="nav-link text-gray-700 hover:text-primary">Skills</a>
+        <a href="#projects" class="nav-link text-gray-700 hover:text-primary">Projects</a>
+        <a href="#contact" class="nav-link text-gray-700 hover:text-primary">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero text-white flex items-center justify-center py-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between">
+      <div class="md:w3/5 mb-12 md:mb-0 animate-fade-in" style="animation-delay: 0.2s;">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Hi, I'm <span class="text-yellow-300">Rohit Chowdhury</span></h1>
+        <h2 class="text-2xl md:text-3xl mb-6 font-medium">Data scientist </h2>
+        <p class="text-lg opacity-90 mb-8 max-w-2xl">
+          <!-- I create beautiful, responsive websites and applications with modern technologies.
+          Let's build something amazing together. -->
+        </p>
+        <div class="flex space-x-4">
+          <a href="#contact" class="border-white border-2 text-white py-3 px-6 rounded-full font-semibold hover:bg-primary hover:text-black transition duration-300">Contact Me</a>
+          <a href="#projects" class="border-white border-2 text-white py-3 px-6 rounded-full font-semibold hover:bg-primary hover:text-black transition duration-300">View Work</a>
+        </div>
+      </div>
+      <div class="md:w-2/5 animate-fade-in" style="animation-delay: 0.4s;">
+        <img src="profile.jpg" alt="Professional headshot of a web developer smiling, wearing glasses with blurred technology background" class="w-full rounded-full border-8 border-white shadow-2xl">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">About <span class="text-primary">Me</span></h2>
+      
+      <div class="flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-1/3">
+          <img src="p1.jpg" alt="Professional developer working on laptop at a modern workspace with multiple monitors and coffee cup" class="about-img w-full">
+        </div>
+        <div class="md:w-2/3">
+          <h3 class="text-2xl font-semibold mb-6">Curious about me?</h3>
+          <p class="text-lg mb-6">
+            I'm a passionate Data Science and AI/ML student with a strong foundation in statistics, programming, and machine learning. I enjoy uncovering insights from data and building intelligent models that solve real-world problems. My experience includes working with tools and frameworks like Python, Pandas, Scikit-learn, and SQL.
+
+          </p>
+          <p class="text-lg mb-8">
+            When I'm not exploring datasets or training models, you'll find me reading research papers, participating in hackathons, or experimenting with new algorithms. I believe in continuous learning and am always eager to explore the latest developments in artificial intelligence and data science.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <div class="bg-gray-100 px-4 py-2 rounded-lg">
+              <p><span class="font-semibold">Name:</span> Rohit Chowdhury</p>
+            </div>
+            <div class="bg-gray-100 px-4 py-2 rounded-lg">
+              <p><span class="font-semibold">Email:</span> choudharyrohit8454@gmail.com</p>
+            </div>
+            <div class="bg-gray-100 px-4 py-2 rounded-lg">
+              <p><span class="font-semibold">B-tech:</span> 2nd Year</p>
+            </div>
+            <div class="bg-gray-100 px-4 py-2 rounded-lg">
+              <p><span class="font-semibold">From:</span> Haldia instute of technology</p>
+            </div>
+          </div>
+          <a href="#contact" class="mt-8 inline-block bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">
+            <i class="fas fa-paper-plane mr-2"></i>Hire Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">My <span class="text-primary">Skills</span></h2>
+      <p class="text-xl text-gray-600 mb-12 text-center max-w-3xl mx-auto">
+        Here are the technologies and tools I'm proficient with
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Programming Languages -->
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold mb-6"><i class="fas fa-code mr-2 text-primary"></i>Programming Languages</h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>C</span>
+                <span>75%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 75%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>C++</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>Python</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 85%"></div>
+              </div>
+              <br>
+              <div class="flex justify-between mb-2">
+                <span>R</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Frameworks & Libraries -->
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold mb-6"><i class="fas fa-cubes mr-2 text-primary"></i>Frameworks & Libraries</h3>
+          <div class="space-y-6">
+            <div>
+             
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>Numpy</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>Pandas</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 90%"></div>
+              </div>
+              <br>
+               <div class="flex justify-between mb-2">
+                <span>Matplotlib</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 85%"></div>
+              </div>
+              <br>
+               <div class="flex justify-between mb-2">
+                <span>Seaborn</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 80%"></div>
+              </div>
+              <br>
+               <div class="flex justify-between mb-2">
+                <span>Flask</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 85%"></div>
+              </div>
+              <br>
+              <div class="flex justify-between mb-2">
+                <span>Scikit-learn</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 85%"></div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tools & Platforms -->
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold mb-6"><i class="fas fa-tools mr-2 text-primary"></i>Machine Learning</h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>Data Cleaning & Feature Engineering</span>
+                <span>95%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>Exploratory Data Analysis (EDA)</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>Supervised & Unsupervised Learning</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 80%"></div>
+              </div>
+              <br>
+              <div class="flex justify-between mb-2">
+                <span>Model Evaluation & Optimization</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- fronted -->
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold mb-6"><i class="fas fa-paint-brush mr-2 text-primary"></i>Fronted</h3>
+          <div class="space-y-6">
+             <div class="flex justify-between mb-2">
+                <span>Streamlit</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 90%"></div>
+              </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>HTML</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 80%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>CSS</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span>JavaScript</span>
+                <span>75%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-percentage" style="width: 75%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-12 text-center">
+        <a href="#" class="inline-block bg-primary text-white py-3 px-8 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300" id="download-cv">
+          <i class="fas fa-download mr-2"></i>Download CV
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">My <span class="text-primary">Projects</span></h2>
+      <p class="text-xl text-gray-600 mb-12 text-center max-w-3xl mx-auto">
+        Here are some of my recent projects. Each represents unique challenges and solutions.
+      </p>
+      
+      <!-- <div class="flex justify-center mb-8">
+        <div class="flex flex-wrap gap-2 md:gap-4">
+          <button class="project-filter px-4 py-2 rounded-lg bg-primary text-white" data-filter="all">All</button>
+          <button class="project-filter px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300" data-filter="web">stock pridicter</button>
+          <button class="project-filter px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300" data-filter="mobile">currency converter</button>
+          <button class="project-filter px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300" data-filter="design">game</button>
+        </div>
+      </div> -->
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <!-- <div class="project-card" data-category="web">
+          <div class="overflow-hidden">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1d08fbbf-a4d0-4f34-94d7-8764a9e0a86b.png" alt="Dashboard application screenshot with analytics charts, metrics and user interface elements" class="project-img w-full">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Analytics Dashboard</h3>
+            <p class="text-gray-600 mb-4">A comprehensive analytics platform built with React and Chart.js</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">React</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Chart.js</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Node.js</span>
+            </div>
+            <div class="flex space-x-3">
+              <a href="#" class="text-primary hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+              <a href="#" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+            </div>
+          </div>
+        </div> -->
+        
+        <!-- Project 2 -->
+        <!-- <div class="project-card" data-category="mobile">
+          <div class="overflow-hidden">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bbe5250e-1b97-42da-bfa5-ccac9fb85b36.png" alt="Mobile fitness app interface showing workout routines and progress tracking" class="project-img w-full">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Fitness Tracker</h3>
+            <p class="text-gray-600 mb-4">Mobile application for tracking workouts and nutrition plans</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">React Native</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Firebase</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Redux</span>
+            </div>
+            <div class="flex space-x-3">
+              <a href="#" class="text-primary hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+              <a href="#" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+            </div>
+          </div>
+        </div> -->
+        
+        <!-- Project 3 -->
+        <!-- <div class="project-card" data-category="design">
+          <div class="overflow-hidden">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc220e44-2aae-41b2-bc66-f5d289e9f8ef.png" alt="E-commerce website design with product listing, shopping cart and clean interface" class="project-img w-full">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">E-commerce Redesign</h3>
+            <p class="text-gray-600 mb-4">Complete UI/UX redesign for an online clothing store</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Figma</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">UX Research</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Prototyping</span>
+            </div>
+            <div class="flex space-x-3">
+              <a href="#" class="text-primary hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Case Study</a>
+              <a href="#" class="text-gray-600 hover:underline"><i class="fab fa-dribbble mr-1"></i>Dribbble</a>
+            </div>
+          </div>
+        </div> -->
+        
+        <!-- Project 4 -->
+        <div class="project-card" data-category="web">
+          <div class="overflow-hidden">
+            <img src="recommended.png" alt="Real estate website homepage with property listings, search filters and map view" class="project-img w-full">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Movie Recommended system</h3>
+            <p class="text-gray-600 mb-4">Movie Recommendation System with Real-Time Analytics and Trend Forecasting</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Machine learning</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Streamlit</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Pandas</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Numpy</span>
+              
+            </div>
+            <div class="flex space-x-3">
+              <a href="https://movie-recommended123.streamlit.app/" class="text-primary hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+              <a href="https://github.com/Rohit45chowdhury/Movie-Recommended" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 5 -->
+        <div class="project-card" data-category="mobile">
+          <div class="overflow-hidden">
+            <img src="spam.jpg" alt="Mobile recipe app showing food preparation steps, ingredients and cooking timer" class="project-img w-full">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Spam Classifier</h3>
+            <p class="text-gray-600 mb-4">Instant Spam Detection System with High-Precision Classification</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Machine learning</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Numpy</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Pandas</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Streamlit</span>
+            </div>
+            <div class="flex space-x-3">
+              <a href="https://spamclassifier-eeahu2xqyliytigwmbnuvg.streamlit.app/" class="text-primary hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+              <a href="https://github.com/Rohit45chowdhury/spam_classifier" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 6 -->
+        <div class="project-card" data-category="design">
+          <div class="overflow-hidden">
+            <img src="analysis.jpg" alt="Financial banking app UI showing account balances, transaction history and spending analytics" class="project-img w-full">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">E-Commerce Data Analysis</h3>
+            <p class="text-gray-600 mb-4">Real-time E-commerce Data Analysis</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Streamlit</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Pandas</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Matplotlib</span>
+              <span class="bg-gray-100 px-2 py-1 rounded text-sm">Seaborn</span>
+            </div>
+            <div class="flex space-x-3">
+              <a href="https://e-commerce-data-analysis-csaj5azjpnvyav2m6ivayj.streamlit.app/" class="text-primary hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+              <a href="https://github.com/Rohit45chowdhury/E-commerce-Data-Analysis" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+        <div class="mt-12 text-center"> <a href="https://github.com/Rohit45chowdhury" class="inline-block border-2 border-primary text-primary py-3 px-8 rounded-lg font-semibold hover:bg-black hover:text-white transition duration-300"> View All Projects </a> </div>
+        
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Get In <span class="text-primary">Touch</span></h2>
+      <p class="text-xl text-gray-600 mb-12 text-center max-w-3xl mx-auto">
+        Have a project in mind or want to chat? Feel free to reach out!
+      </p>
+      
+      <div class="flex flex-col lg:flex-row gap-12">
+        <div class="lg:w-1/2">
+          <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+          <p class="mb-8">
+            I'm available for freelance work and full-time opportunities. Whether you have a question or just want to say hi, I'll get back to you as soon as possible!
+          </p>
+          
+          <div class="space-y-6">
+            <div class="flex items-center">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Location</h4>
+                <p class="text-gray-600">Siwan,Bihar</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fas fa-envelope text-primary text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Email</h4>
+                <p class="text-gray-600">choudharyrohit8454@gmail.com</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fas fa-phone-alt text-primary text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Phone</h4>
+                <p class="text-gray-600">+91</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8">
+            <h4 class="font-semibold mb-4">Connect with me</h4>
+            <div class="flex space-x-4">
+              <a href="https://github.com/Rohit45chowdhury" class="bg-gray-200 p-3 rounded-full hover:bg-primary hover:text-white transition duration-300">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://x.com/RohitYa7419243?t=0F-dVgYP6tUK8aKTKph4yQ&s=09" class="bg-gray-200 p-3 rounded-full hover:bg-sky-500 hover:text-white transition duration-300">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/rohit-chowdhury-a36754327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="bg-gray-200 p-3 rounded-full hover:bg-blue-700 hover:text-white transition duration-300">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="https://www.instagram.com/rohitydv1647?igsh=YjV4N2ZuMmhxZ2c3" class="bg-gray-200 p-3 rounded-full hover:bg-pink-500 hover:text-white transition duration-300">
+                 <i class="fab fa-instagram"></i>
+               </a>
+
+            </div>
+            <br>
+            <a href="https://leetcode.com/r8rZYzBZ41/" target="_blank" class="inline-flex items-center gap-2 border-2 border-black-500 text-white-500 py-3 px-8 rounded-lg font-semibold hover:bg-black hover:text-white transition duration-300">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" alt="LeetCode Logo" class="h-6 w-6">
+             LeetCode Profile
+             </a>
+
+          </div>
+        </div>
+        <!-- contact-form -->
+         
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  
+
+  <section id="contact" class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="lg:w-full">
+        <form id="contact-form" class="bg-white p-8 rounded-xl shadow-md">
+          <div class="mb-6">
+            <label for="name" class="block mb-2 font-medium">Name</label>
+            <input type="text" id="name" name="name" class="contact-input w-full px-4 py-3 rounded-lg border" placeholder="Your Name" required>
+          </div>
+          <div class="mb-6">
+            <label for="email" class="block mb-2 font-medium">Email</label>
+            <input type="email" id="email" name="email" class="contact-input w-full px-4 py-3 rounded-lg border" placeholder="Your Email" required>
+          </div>
+          <div class="mb-6">
+            <label for="subject" class="block mb-2 font-medium">Subject</label>
+            <input type="text" id="subject" name="subject" class="contact-input w-full px-4 py-3 rounded-lg border" placeholder="Subject">
+          </div>
+          <div class="mb-6">
+            <label for="message" class="block mb-2 font-medium">Message</label>
+            <textarea id="message" name="message" rows="5" class="contact-input w-full px-4 py-3 rounded-lg border" placeholder="Your Message" required></textarea>
+          </div>
+        </form>
+
+        <!-- External styled Submit Button -->
+        <button id="external-submit" type="button" class="inline-block border-2 border-primary text-primary py-3 px-8 rounded-lg font-semibold hover:bg-black hover:text-white transition duration-300">
+          Send Message
+        </button>
+
+        <!-- Success Message -->
+        <div id="form-success" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded-lg">
+          Message sent successfully! I'll get back to you soon.
+        </div>
+
+        <!-- Error Message -->
+        <div id="form-error" class="hidden mt-4 p-4 bg-red-100 text-red-800 rounded-lg">
+          There was an error sending your message. Please try again.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    
+  document.addEventListener('DOMContentLoaded', function () {
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    const formError = document.getElementById('form-error');
+    const externalSubmit = document.getElementById('external-submit');
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzDEJ4tIZarUYRCKKiaSGGu1kry6XsvTt0ntfdM11a-5cgjrGoGHThk0JTODJoqvskH/exec';
+
+    // External button trigger
+    if (externalSubmit && contactForm) {
+      externalSubmit.addEventListener('click', () => {
+        contactForm.requestSubmit();
+      });
+    }
+
+    // Form submission
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+
+        fetch(scriptURL, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          if (response.ok) {
+            if (formSuccess) formSuccess.classList.remove('hidden');
+            if (formError) formError.classList.add('hidden');
+            contactForm.reset();
+
+            setTimeout(() => {
+              if (formSuccess) formSuccess.classList.add('hidden');
+            }, 5000);
+          } else {
+            throw new Error('Network response was not ok');
+          }
+        })
+        .catch(error => {
+          console.error('Error!', error.message);
+          if (formError) formError.classList.remove('hidden');
+          if (formSuccess) formSuccess.classList.add('hidden');
+        });
+      });
+    }
+  });
+
+
+  </script>
+</body>
+</html>
+
+        
+        
+            
+          
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="#" class="text-2xl font-bold">Rohit Chowdhury</a>
+          <p class="mt-2 text-gray-400">Designed and Developed by Rohit</p>
+        </div>
+        <div class="flex space-x-6 md:space-x-8">
+          <a href="#home" class="hover:text-primary transition duration-300">Home</a>
+          <a href="#about" class="hover:text-primary transition duration-300">About</a>
+          <a href="#skills" class="hover:text-primary transition duration-300">Skills</a>
+          <a href="#projects" class="hover:text-primary transition duration-300">Projects</a>
+          <a href="#contact" class="hover:text-primary transition duration-300">Contact</a>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400 mb-4 md:mb-0">© 2025 Rohit Chowdhury. All rights reserved.</p>
+        <div class="flex space-x-4">
+          <a href="https://github.com/Rohit45chowdhury" class="text-gray-400 hover:text-primary transition duration-300">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://x.com/RohitYa7419243?t=0F-dVgYP6tUK8aKTKph4yQ&s=09" class="text-gray-400 hover:text-sky-500 transition duration-300">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/rohit-chowdhury-a36754327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-gray-400 hover:text-blue-700 transition duration-300">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://www.instagram.com/rohitydv1647?igsh=YjV4N2ZuMmhxZ2c3" class="text-gray-400 hover:text-pink-500 transition duration-300">
+           <i class="fab fa-instagram"></i>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        document.querySelector('nav').classList.add('scrolled');
+      } else {
+        document.querySelector('nav').classList.remove('scrolled');
+      }
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Project filtering
+    const filterBtns = document.querySelectorAll('.project-filter');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('bg-primary', 'text-white'));
+        filterBtns.forEach(b => b.classList.add('bg-gray-200', 'hover:bg-gray-300'));
+        btn.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+        btn.classList.add('bg-primary', 'text-white');
+        
+        const filter = btn.getAttribute('data-filter');
+        
+        // Filter projects
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+            }, 10);
+          } else {
+            card.style.opacity = '0';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+    
+    // Animate skill bars on scroll
+    window.addEventListener('scroll', () => {
+      const skillSection = document.getElementById('skills');
+      const scrollPosition = window.scrollY + window.innerHeight;
+      
+      if (scrollPosition > skillSection.offsetTop + 200) {
+        document.querySelectorAll('.skill-percentage').forEach(bar => {
+          bar.style.width = bar.parentElement.nextElementSibling.textContent;
+        });
+      }
+    });
+    
+    // Trigger animation if skills section is already in view on load
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.skill-percentage').forEach(bar => {
+            bar.style.width = bar.parentElement.nextElementSibling.textContent;
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    observer.observe(document.getElementById('skills'));
+    
+    // Contact form submission
+   const contactForm = document.getElementById('contact-form');
+const formSuccess = document.getElementById('form-success');
+const formError = document.getElementById('form-error');
+
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzDEJ4tIZarUYRCKKiaSGGu1kry6XsvTt0ntfdM11a-5cgjrGoGHThk0JTODJoqvskH/exec';
+
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(contactForm);
+
+  fetch(scriptURL, {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => {
+      if (response.ok) {
+        formSuccess.classList.remove('hidden');
+        formError.classList.add('hidden');
+        contactForm.reset();
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          formSuccess.classList.add('hidden');
+        }, 5000);
+      } else {
+        throw new Error('Submission failed');
+      }
+    })
+    .catch(error => {
+      console.error('Error!', error.message);
+      formError.classList.remove('hidden');
+      formSuccess.classList.add('hidden');
+    });
+});
+
+    
+    // Download CV button
+    document.getElementById('download-cv').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('In a real implementation, this would download your CV file.');
+      
+      // This would be the actual implementation to download a file:
+      // const link = document.createElement('a');
+      // link.href = 'path/to/your-cv.pdf';
+      // link.download = 'John-Doe-CV.pdf';
+      // document.body.appendChild(link);
+      // link.click();
+      // document.body.removeChild(link);
+    });
+
+    
+
+
+   
+
+  </script>
+</body>
+</html>
+
